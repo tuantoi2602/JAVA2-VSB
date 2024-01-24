@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </Console>
+
+        <!-- File Appender -->
+        <RollingFile name="File" fileName="logs/application.log"
+                     filePattern="logs/application-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10" />
+        </RollingFile>
+    </appenders>
+
+    <loggers>
+        <!-- Root Logger -->
+        <root level="INFO">
+            <appender-ref ref="Console" />
+            <appender-ref ref="File" />
+        </root>
+
+        <!-- Product Repository Logger -->
+        <logger name="com.example.pij1.repository.ProductRepository" level="DEBUG" additivity="false">
+            <appender-ref ref="File" />
+            <appender-ref ref="Console" />
+        </logger>
+
+        <!-- Order Repository Logger -->
+        <logger name="com.example.pij1.repository.OrderRepository" level="DEBUG" additivity="false">
+            <appender-ref ref="File" />
+            <appender-ref ref="Console" />
+        </logger>
+
+        <!-- Product Controller Logger -->
+        <logger name="com.example.pij1.controller.ProductController" level="DEBUG" additivity="false">
+            <appender-ref ref="File" />
+            <appender-ref ref="Console" />
+        </logger>
+
+        <!-- Order Controller Logger -->
+        <logger name="com.example.pij1.controller.OrderController" level="DEBUG" additivity="false">
+            <appender-ref ref="File" />
+            <appender-ref ref="Console" />
+        </logger>
+    </loggers>
+</Configuration>
